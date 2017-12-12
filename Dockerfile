@@ -1,4 +1,4 @@
-FROM ruby:2.4.2
+FROM starefossen/ruby-node
 
 RUN apt-get update && apt-get install -qq -y --no-install-recommends build-essential
 
