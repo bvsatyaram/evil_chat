@@ -1,0 +1,26 @@
+version: '3'
+volumes:
+  bundle_cache:
+  # Mount volume with default driver
+services:
+  db:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: password
+      POSTGRES_USER: evil_chat
+      POSTGRES_DB: evil_chat_development
+  dev:
+    tty: true
+    stdin_open: true
+    build: .
+    container_name: evil-chat-app
+    command: bin/rails s -b 0.0.0.0
+    volumes:
+      - bundle_cache:/bundle
+      - .:/evil_chat:cached
+    ports:
+      - 3000:3000
+    depends_on:
+      - db
+    environment:
+      RAILS_ENV: development
