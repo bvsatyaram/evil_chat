@@ -1,6 +1,10 @@
 FROM starefossen/ruby-node
 
-RUN apt-get update && apt-get install -qq -y --no-install-recommends build-essential
+RUN apt-get update && apt-get install -qq -y --no-install-recommends build-essential vim
+
+RUN git config --global user.email "bvsatyaram@gmail.com"
+RUN git config --global user.name "BV Satyaram"
+RUN git config --global core.editor "vim"
 
 RUN gem update bundler
 
@@ -8,6 +12,8 @@ RUN gem update bundler
 RUN mkdir -p /evil_chat
 WORKDIR /evil_chat
 COPY . .
+
+RUN git config core.fileMode false
 
 ENV BUNDLE_PATH=/bundle \
 BUNDLE_BIN=/bundle/bin \
